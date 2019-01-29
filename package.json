@@ -1,0 +1,25 @@
+{
+  "name": "underworlds-proxifier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GoX1337/warhammerUnderworldsCrawler.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GoX1337/warhammerUnderworldsCrawler/issues"
+  },
+  "homepage": "https://github.com/GoX1337/warhammerUnderworldsCrawler#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "fs": "0.0.1-security",
+    "image-downloader": "^3.4.2",
+    "request": "^2.88.0"
+  }
+}
