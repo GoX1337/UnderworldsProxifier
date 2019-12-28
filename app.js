@@ -48,9 +48,11 @@ const createDirectory = (dirName) => {
 }
 
 const dlImage = (card) => {
-    let dir = card.expansion.toLowerCase().split(' ').join('_') + "/" + card.type.toLowerCase().split(' ').join('_');
-    createDirectory(dir);
+    let exp = card.expansion.toLowerCase().split(' ').join('_');
+    let type = card.type.toLowerCase().split(' ').join('_');
 
+    createDirectory(exp + "/" + type);
+    
     let options = {
         url: baseUrl + "/" + card.path,
         dest: 'cards/' + dir,
