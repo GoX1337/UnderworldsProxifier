@@ -21,25 +21,22 @@ const parseResponse = (response) => {
     let delay = 0;
     let ii = 0;
   
-    $("#carddb").find('tbody').find('tr').each(function (i, elem) {
-        ii++;
-        
+    $("#carddb").find('tbody').find('tr').each(function (i, elem) {        
         let card = {
             id: $(this).find('th').eq(0).text(),
             name: $(this).find('td').eq(0).attr('data-sort'),
-            faction: $(this).find('td').eq(1).attr('data-search').toLowerCase().split(' ').join('_'),
-            type: $(this).find('td').eq(2).attr('data-search').toLowerCase().split(' ').join('_'),
-            expansion: $(this).find('td').eq(6).attr('data-search').toLowerCase().split(' ').join('_'),
+            faction: $(this).find('td').eq(1).attr('data-search'),
+            type: $(this).find('td').eq(2).attr('data-search'),
+            expansion: $(this).find('td').eq(6).attr('data-search'),
             path: $(this).find('td').eq(0).find('.img-fluid').attr('data-src'),
         }
-
+        ii++;
         console.log(card);
 
         setTimeout(() => {
             dlImage(card);
         }, delay);
         delay += 1000;
-
     });
     console.log(ii + " cards");
 }
@@ -51,7 +48,7 @@ const createDirectory = (dirName) => {
 }
 
 const dlImage = (card) => {
-    let dir = card.expansion + "/" + card.type;
+    let dir = card.expansion.toLowerCase().split(' ').join('_') + "/" + card.type.toLowerCase().split(' ').join('_');
     createDirectory(dir);
 
     let options = {
