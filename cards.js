@@ -5,7 +5,7 @@ const download = require('image-downloader');
 
 const baseUrl = "https://www.underworldsdb.com";
 
-console.log("Underworlds Proxifier...");
+console.log("Underworlds Proxifier: get all game cards...");
 
 request.get(baseUrl, (error, response, body) => {
     if (error) {
@@ -55,7 +55,7 @@ const dlImage = (card) => {
     
     let options = {
         url: baseUrl + "/" + card.path,
-        dest: 'cards/' + dir,
+        dest: 'cards/' + exp + "/" + type,
     };
 
     download.image(options)

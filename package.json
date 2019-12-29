@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "init": "node cards.js && node warbands.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "cheerio": "^1.0.0-rc.2",
     "fs": "0.0.1-security",
     "image-downloader": "^3.4.2",
+    "pdfkit": "^0.11.0",
     "request": "^2.88.0"
   }
 }
