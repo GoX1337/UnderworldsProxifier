@@ -4,7 +4,9 @@ module.exports = (bandName) => {
         case "the-farstriders" :
         case "stormsires-cursebreakers" :
         case "ironsouls-condemners" :
-        case "rippas-snarlfangs": return 3;
+        case "rippas-snarlfangs":
+        case "the-wurmspat":
+        case "morgoks-krushas": return 3;
 
         case "ironskulls-boyz" :
         case "the-chosen-axes" :
@@ -17,7 +19,9 @@ module.exports = (bandName) => {
         case "spiteclaws-swarm" :
         case "the-eyes-of-the-nine" :
         case "thundriks-profiteers" :
-        case "skaeths-wild-hunt" : return 5;
+        case "skaeths-wild-hunt" : 
+        case "hrothgorns-mantrappers" :
+        case "morgwaeths-blade-coven" : return 5;
 
         case "godsworn-hunt" :
         case "grashraks-despoilers" : return 6;
