@@ -1,59 +1,58 @@
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
+const readline = require('readline');
+const sizeOf = require('image-size');
 
-// Create a document
-const doc = new PDFDocument({ margin:0});
 
-// Pipe its output somewhere, like to a file or HTTP response
-// See below for browser usage
-doc.pipe(fs.createWriteStream('output.pdf'));
+const cardInput = readline.createInterface({
+     input: process.stdin,
+     output: process.stdout
+});
 
-// Add an image, constrain it to a given size, and center it vertically and horizontally
-doc.image('cards/dreadfane/ploy/Dissipate.png', 0, 0, {
-   align: 'center',
-   valign: 'center',
-   scale: "0.3"
+cardInput.question("Paste a list of cards. Example: B43,499,G42 etc etc \n", (answer) => {
+
+     var xCord = 0;
+     var yCord = 0;
+
+     // Create a document
+     const doc = new PDFDocument({ margin: 0 });
+
+     doc.pipe(fs.createWriteStream('output.pdf'));
+     const cardNocomma = answer.split(',');
+     console.log(cardNocomma)
+     for (let i = 0; i < cardNocomma.length; i++) {
+
+          // Trim the excess whitespace and lowercase.
+          cardNocomma[i] = cardNocomma[i].replace(/^\s*/, "").replace(/\s*$/, "").toLowerCase();
+
+          let x = i % 3;
+          xCord = 200 * x;
+
+          if (i % 3 == 0 && i != 0) {
+
+               yCord += 250
+          }
+
+          // Reset x and y cords on new page
+          if (i % 9 == 0 && i != 0) {
+               doc.addPage();
+               xCord = 0;
+               yCord = 0;
+          }
+
+          // Images might have different sizes
+          let dimensions = sizeOf('cards_numbers/' + cardNocomma[i] + '.png');
+          let rescale = 160 / dimensions.width
+
+          doc.image('cards_numbers/' + cardNocomma[i] + '.png', xCord, yCord, {
+               align: 'center',
+               valign: 'center',
+               scale: rescale
+          });
+     }
+     doc.end();
+     cardInput.close();
 });
-doc.image('cards/dreadfane/ploy/Outflank.png', 200, 0, {
-    align: 'center',
-    valign: 'center',
-    scale: "0.3"
-});
-doc.image('cards/dreadfane/ploy/Steadfast.png', 400 , 0, {
-    align: 'center',
-    valign: 'center',
-    scale: "0.3"
-});
-doc.image('cards/dreadfane/ploy/Dissipate.png', 0, 250, {
-    align: 'center',
-    valign: 'center',
-    scale: "0.3"
- });
-doc.image('cards/dreadfane/ploy/Outflank.png', 200, 250, {
-     align: 'center',
-     valign: 'center',
-     scale: "0.3"
-});
-doc.image('cards/dreadfane/ploy/Steadfast.png', 400 , 250, {
-     align: 'center',
-     valign: 'center',
-     scale: "0.3"
-});
-doc.image('cards/dreadfane/ploy/Dissipate.png', 0, 500, {
-    align: 'center',
-    valign: 'center',
-    scale: "0.3"
- });
-doc.image('cards/dreadfane/ploy/Outflank.png', 200, 500, {
-     align: 'center',
-     valign: 'center',
-     scale: "0.3"
-});
-doc.image('cards/dreadfane/ploy/Steadfast.png', 400 , 500, {
-     align: 'center',
-     valign: 'center',
-     scale: "0.3"
-});
- 
-// Finalize PDF file
-doc.end();
+
+
+
